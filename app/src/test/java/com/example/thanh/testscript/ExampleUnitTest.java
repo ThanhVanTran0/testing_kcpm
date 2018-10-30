@@ -32,11 +32,24 @@ public class ExampleUnitTest {
 //
 //        driver.findElement(txtName).sendKeys(sName);
 //        driver.findElement(txtPass).sendKeys(sPass);
+
+//        Tim nut dang nhap face
+//        MobileElement btnLogin = (MobileElement) driver.findElement(By.xpath("//android.widget.TextView[@text='Đăng nhập Facebook']"));
+//        if(btnLogin.isDisplayed()) {
+//            System.out.println("Thay thang face");
+//            btnLogin.click();
+//            driver.findElement(By.id("m_login_email")).sendKeys("thanhvantran052@gmail.com");
+//            driver.findElementById("m_login_password").sendKeys("01692982109as");
+//            driver.findElementById("u_0_5").click();
+//        }
+
+
         MobileElement btnAdd = (MobileElement) driver.findElement(By.xpath("//hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.support.v4.view.ViewPager/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup"));
         if(btnAdd.isDisplayed()) {
             System.out.println("Dang hien thi");
             AndroidTouchAction touchAction = new AndroidTouchAction(driver);
             touchAction.tap(TapOptions.tapOptions().withElement(ElementOption.element(btnAdd))).perform();
+
         }
         else {
             System.out.println("Meo");
@@ -71,11 +84,12 @@ public class ExampleUnitTest {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("appium-version", "1.7.1"); // Version Appium đang sử dụng, có hay không cũng được
         capabilities.setCapability("platformName", "Android"); //plaftFrom đang chạy (Android/IOS)
-        capabilities.setCapability("platformVersion", "6.0");// Phiên bản adnroid máy dang dung để test
+        capabilities.setCapability("platformVersion", "9");// Phiên bản adnroid máy dang dung để test
         capabilities.setCapability("deviceName", "emulator-5554"); // Tên thiết bị dùng để test
 
         capabilities.setCapability("appPackage", "vn.rure"); //App Package name
         capabilities.setCapability("appActivity", "vn.rure.MainActivity");// Activity name
+        capabilities.setCapability("noReset",true);
 
 
         driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), capabilities);
