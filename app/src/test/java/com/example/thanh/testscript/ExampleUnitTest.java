@@ -110,7 +110,16 @@ public class ExampleUnitTest {
     @DataProvider(name = "DataTest")
     public static Object[][] datas() {
         return new Object[][] {
-                {"Tes1","Ha Noi","Da Nang","120000"},
+                {"Test1","Ha Noi","Da Nang","120000"},
+                {"","","",""},
+                {"Test3","","Da Nang","120000"},
+                {"Test4","Ha Noi","","120000"},
+                {"Test5","Ha Noi","Da Nang",""},
+                {"Test6","sjsjsjskwiwwkkiz","Da Nang","120000"},
+                {"Test7","Ha Noi","anvmvmhdndhnkkg","120000"},
+                {"Test8","Ha Noi","Da Nang","yturnjfn"},
+                {"Test9","New York","Da Nang","120000"},
+                {"Test10","Ha Noi","Ha Noi","0"},
         };
     }
 
