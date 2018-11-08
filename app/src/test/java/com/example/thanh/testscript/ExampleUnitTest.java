@@ -12,23 +12,47 @@ import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidTouchAction;
 import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.offset.ElementOption;
-import io.appium.java_client.touch.offset.PointOption;
 
 import static org.junit.Assert.*;
 
 public class ExampleUnitTest {
     MobileDriver driver;
 
+    @DataProvider(name = "DataTest")
+    public static Object[][] datas() {
+        return new Object[][] {
+                {"Test1","Ha Noi","Da Nang","120000", "Pass"},
+                {"","","","", "Fail"},
+                {"","Ha noi","Da Nang","120000","Fail"},
+                {"Test4","","Da Nang","120000", "Fail"},
+                {"Test5","Ha Noi","","120000", "Fail"},
+                {"Test6","Ha Noi","Da Nang","", "Fail"},
+                {"Test7","sjsjsjskwiwwkkiz","Da Nang","120000", "Fail"},
+                {"Test8","Ha Noi","anvmvmhdndhnkkg","120000", "Fail"},
+                {"Test9","Ha Noi","Da Nang","yturnjfn","Fail"},
+                {"Test10","New York","Da Nang","-120000","Fail"},
+                {"Test11","Tp HCM","Da Nang","120000","Pass"},
+                {"Test12","+-/","Da Nang","120000","Fail"},
+                {"Test13","Ha Noi","/*-+","120000","Fail"},
+                {"/*--/*","New York","Da Nang","120000","Fail"},
+                {"Test15","New York","Da Nang","/*-+","Fail"},
+                {"Test16","Da Nang","Da Nang","120000","Pass"},
+                {"Test17","","Da Nang","120000","Pass"},
+                {"Test18","hcm","Da Nang","120000 + 40000","Pass"},
+                {"Test19","hcm","Da Nang","120000 - 50000","Pass"},
+                {"Test20","hcm","Da Nang","120000/4","Pass"},
+        };
+    }
+
+//    @org.junit.Test()
     @Test(dataProvider = "DataTest")
     public void testRun(String sTenChuyenDi, String sTenDiemDi, String sTenDiemDen, String sSoTien) {
         System.out.println("testrun");
@@ -107,30 +131,14 @@ public class ExampleUnitTest {
         }
     }
 
-    @DataProvider(name = "DataTest")
-    public static Object[][] datas() {
-        return new Object[][] {
-                {"Test1","Ha Noi","Da Nang","120000"},
-                {"","","",""},
-                {"Test3","","Da Nang","120000"},
-                {"Test4","Ha Noi","","120000"},
-                {"Test5","Ha Noi","Da Nang",""},
-                {"Test6","sjsjsjskwiwwkkiz","Da Nang","120000"},
-                {"Test7","Ha Noi","anvmvmhdndhnkkg","120000"},
-                {"Test8","Ha Noi","Da Nang","yturnjfn"},
-                {"Test9","New York","Da Nang","120000"},
-                {"Test10","Ha Noi","Ha Noi","0"},
-        };
-    }
-
     @BeforeMethod(alwaysRun = true)
-    public void setUp() throws MalformedURLException {
+    public void testSetUp() throws MalformedURLException {
         System.out.println("start");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("appium-version", "1.7.1"); // Version Appium đang sử dụng, có hay không cũng được
         capabilities.setCapability("platformName", "Android"); //plaftFrom đang chạy (Android/IOS)
-        capabilities.setCapability("platformVersion", "9");// Phiên bản adnroid máy dang dung để test
+        capabilities.setCapability("platformVersion", "6.0");// Phiên bản adnroid máy dang dung để test
         capabilities.setCapability("deviceName", "emulator-5554"); // Tên thiết bị dùng để test
 
         capabilities.setCapability("appPackage", "vn.rure"); //App Package name
@@ -145,7 +153,7 @@ public class ExampleUnitTest {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void afterTest() {
+    public void testAfter() {
         System.out.println("end");
         driver.quit();
     }
