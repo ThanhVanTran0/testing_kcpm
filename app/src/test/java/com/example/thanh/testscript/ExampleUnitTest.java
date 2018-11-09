@@ -1,8 +1,5 @@
 package com.example.thanh.testscript;
 
-import org.junit.After;
-import org.junit.Before;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterMethod;
@@ -52,9 +49,9 @@ public class ExampleUnitTest {
         };
     }
 
-//    @org.junit.Test()
     @Test(dataProvider = "DataTest")
-    public void testRun(String sTenChuyenDi, String sTenDiemDi, String sTenDiemDen, String sSoTien) {
+//    @org.junit.Test
+    public void testRun(String sTenChuyenDi, String sTenDiemDi, String sTenDiemDen, String sSoTien, String kq) {
         System.out.println("testrun");
 
         AndroidTouchAction touchAction = new AndroidTouchAction(driver);
@@ -116,18 +113,13 @@ public class ExampleUnitTest {
             }
 
 //            Phan so sanh xem chuyen di co duoc tao hay khong
-            MobileElement txtTen = (MobileElement) driver.findElementByXPath("//android.widget.TextView[@instance='2']");
+            MobileElement txtTen = (MobileElement) driver.findElementByXPath("//android.widget.TextView[@instance='1']");
             assertEquals(txtTen.getText(),"Hotake Kakashi");
+//            System.out.println("Ten: " + txtTen.getText());
 
-            MobileElement txtTrangThai = (MobileElement) driver.findElementByXPath("//android.widget.TextView[@instance='3']");
+            MobileElement txtTrangThai = (MobileElement) driver.findElementByXPath("//android.widget.TextView[@instance='2']");
             assertEquals(txtTrangThai.getText(),"vài giây trước");
-
-        }
-
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+//            System.out.println("txtTrangThai: " + txtTrangThai.getText());
         }
     }
 
@@ -136,9 +128,8 @@ public class ExampleUnitTest {
         System.out.println("start");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("appium-version", "1.7.1"); // Version Appium đang sử dụng, có hay không cũng được
         capabilities.setCapability("platformName", "Android"); //plaftFrom đang chạy (Android/IOS)
-        capabilities.setCapability("platformVersion", "6.0");// Phiên bản adnroid máy dang dung để test
+        capabilities.setCapability("platformVersion", "9");// Phiên bản adnroid máy dang dung để test
         capabilities.setCapability("deviceName", "emulator-5554"); // Tên thiết bị dùng để test
 
         capabilities.setCapability("appPackage", "vn.rure"); //App Package name
